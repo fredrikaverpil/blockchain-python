@@ -1,6 +1,6 @@
+import json
 from hashlib import sha256
 from time import time
-import json
 
 
 class Block:
@@ -12,9 +12,9 @@ class Block:
     ):
         """Create a new block for the Blockchain
 
-        :param timestamp: Timestamp of the block, defaults to the time the block object is created
-        :param data: Data to store in the block, defaults to an empty list
-        :param previous_hash: Hash of the previous block, defaults to None.  Should always be specefied except for the genesis block.
+        :param timestamp: Timestamp of the block
+        :param data: Data to store in the block
+        :param previous_hash: Hash of the previous block
         """
         print("Creating block...")
         self.timestamp = timestamp
@@ -70,7 +70,7 @@ class Block:
 
 class Blockchain:
     def __init__(self):
-        """Iitialize the blockchain with an empty, unmined "genesis" block."""
+        """Initialize the blockchain with an empty, unmined "genesis" block."""
         print("Creating blockchain...")
         self.chain = [Block()]
         self.block_time = 30000
@@ -124,7 +124,7 @@ class Blockchain:
         :return: `True` if Valid, `False` otherwise
         """
 
-        for previous_block, current_block in zip(self[:-1], self[1:]):
+        for previous_block, current_block in zip(self.chain[:-1], self.chain[1:]):
 
             # Check validation
             if previous_block.hash != current_block.previous_hash:
