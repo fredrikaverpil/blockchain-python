@@ -2,8 +2,6 @@ from hashlib import sha256
 from time import time
 import json
 
-from loguru import logger
-
 
 class Block:
     def __init__(
@@ -18,7 +16,7 @@ class Block:
         :param data: Data to store in the block, defaults to an empty list
         :param previous_hash: Hash of the previous block, defaults to None.  Should always be specefied except for the genesis block.
         """
-        logger.info("Creating block...")
+        print("Creating block...")
         self.timestamp = timestamp
         self.data = data
         self.previous_hash = previous_hash
@@ -62,7 +60,7 @@ class Block:
 
         :param difficulty: length of the leading zeros to mine for
         """
-        logger.info("Mining...")
+        print("Mining...")
         while self.hash[:difficulty] != "0" * difficulty:
             # We increases our nonce so that we can get a whole different hash.
             self.nonce += 1
@@ -73,9 +71,9 @@ class Block:
 class Blockchain:
     def __init__(self):
         """Iitialize the blockchain with an empty, unmined "genesis" block."""
-        logger.info("Creating blockchain...")
+        print("Creating blockchain...")
         self.chain = [Block()]
-        self.blockTime = 30000
+        self.block_time = 30000
         self.difficulty = 1
 
     def __iter__(self):
@@ -115,7 +113,7 @@ class Blockchain:
         # Since now previous_hash has a value, we must reset the block's hash
         self.chain.append(block)
 
-        if time() - self[-1].timestamp < self.blockTime:
+        if time() - self[-1].timestamp < self.block_time:
             self.difficulty += 1
         else:
             self.difficulty -= 1
