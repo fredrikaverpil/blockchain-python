@@ -120,7 +120,7 @@ class Blockchain:
         else:
             self.difficulty -= 1
 
-    def isValid(self):
+    def is_valid(self):
         """Iterates over the pairs of sequential blocks to validate that their previous hashes are set correctly
 
         :return: `True` if Valid, `False` otherwise
