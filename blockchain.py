@@ -6,7 +6,12 @@ from loguru import logger
 
 
 class Block:
-    def __init__(self, data=[], previous_hash=None, timestamp=time()):
+    def __init__(
+        self,
+        data: None | dict = None,
+        previous_hash: str = None,
+        timestamp: float = time(),
+    ):
         """Create a new block for the Blockchain
 
         :param timestamp: Timestamp of the block, defaults to the time the block object is created
@@ -41,7 +46,7 @@ class Block:
         self._hash = None
 
     @staticmethod
-    def encode(val):
+    def encode(val: str | int | float | bytes | dict | None):
         """Generate a UTF-8 bytes object to represent any object
 
         :param val: Value to encode
@@ -49,7 +54,7 @@ class Block:
         """
         return str(val).encode("utf-8")
 
-    def mine(self, difficulty):
+    def mine(self, difficulty: int):
         """Mine this block until a valid hash is found, based on leading zeros
 
         Basically, it loops until our hash starts with
@@ -92,9 +97,8 @@ class Blockchain:
             indent=4,
         )
 
-    def append(self, data, timestamp=time()):
-        """
-        Add a new block to the blockchain from a new piece of data and an optional timestamp.
+    def append(self, data: None | dict, timestamp: float = time()):
+        """Add a new block to the blockchain from a new piece of data and an optional timestamp.
 
         :param data: Data to add to the new block.
         :param timestamp: UTC timecode of the new block
@@ -117,8 +121,7 @@ class Blockchain:
             self.difficulty -= 1
 
     def isValid(self):
-        """
-        Iterates over the pairs of sequential blocks to validate that their previous hashes are set correctly
+        """Iterates over the pairs of sequential blocks to validate that their previous hashes are set correctly
 
         :return: `True` if Valid, `False` otherwise
         """
