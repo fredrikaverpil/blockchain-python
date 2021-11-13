@@ -1,4 +1,3 @@
-from blockchain import Block
 from blockchain import Blockchain
 from time import time
 
