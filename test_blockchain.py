@@ -1,6 +1,4 @@
 from blockchain import Blockchain
-from time import time
-
 
 chain = Blockchain()
 chain.append(data={"from": "John", "to": "Bob", "amount": 100})
